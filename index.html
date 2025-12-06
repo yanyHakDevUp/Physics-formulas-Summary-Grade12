@@ -1,1 +1,1075 @@
 
+<!doctype html>
+<html lang="km">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>សង្ខេបរូបមន្តរូបវិទ្យា ថ្នាក់ទី១២ — Physics Formulas Summary</title>
+
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+<!-- Khmer OS Font -->
+<style>
+@font-face {
+  font-family: 'Khmer OS';
+  src: local('Khmer OS'), local('KhmerOS');
+  font-weight: normal;
+  font-style: normal;
+}
+</style>
+
+<style>
+  :root{
+    --bg1: #0f172a;
+    --bg2: #1e293b;
+    --card-bg: rgba(255,255,255,0.03);
+    --card-border: rgba(255,255,255,0.08);
+    --text-primary: #e6eef8;
+    --text-secondary: #cbd5e1;
+    --accent-blue: #3b82f6;
+    --accent-purple: #8b5cf6;
+    --accent-green: #10b981;
+    --accent-orange: #f59e0b;
+    --font-sans: "Inter", system-ui, -apple-system, "Segoe UI", Roboto;
+    --font-kh: "Khmer OS", "KhmerOS", "Noto Sans Khmer", serif;
+  }
+
+  *{ box-sizing:border-box; }
+
+  html,body{ 
+    margin:0; 
+    padding:0; 
+    font-family:var(--font-sans); 
+    background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%);
+    color:var(--text-primary);
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  .container{
+    max-width:1400px;
+    margin:0 auto;
+    padding:20px;
+  }
+
+  @media (max-width: 767px){
+    .container{ padding:12px 8px; }
+  }
+
+  /* Header */
+  header{
+    text-align:center;
+    margin-bottom:30px;
+    padding:20px;
+    background:var(--card-bg);
+    border-radius:12px;
+    border:1px solid var(--card-border);
+  }
+
+  @media (max-width: 767px){
+    header{ padding:16px; margin-bottom:20px; }
+  }
+
+  h1{
+    font-family:var(--font-kh);
+    font-size:clamp(20px, 5vw, 32px);
+    margin:0 0 8px 0;
+    color:#fff;
+    font-weight:700;
+  }
+
+  .subtitle{
+    font-family:var(--font-kh);
+    font-size:clamp(12px, 3vw, 16px);
+    color:var(--text-secondary);
+    margin:0;
+  }
+
+  /* Filter Section */
+  .filter-section{
+    margin-bottom:24px;
+    display:flex;
+    gap:12px;
+    align-items:center;
+    flex-wrap:wrap;
+    padding:16px;
+    background:var(--card-bg);
+    border-radius:12px;
+    border:1px solid var(--card-border);
+  }
+
+  @media (max-width: 767px){
+    .filter-section{
+      flex-direction:column;
+      align-items:stretch;
+      padding:12px;
+    }
+  }
+
+  .filter-label{
+    font-family:var(--font-kh);
+    font-size:14px;
+    font-weight:600;
+    color:var(--text-primary);
+  }
+
+  .filter-select{
+    flex:1;
+    min-width:200px;
+    padding:10px 14px;
+    background:rgba(255,255,255,0.05);
+    border:1px solid var(--card-border);
+    border-radius:8px;
+    color:var(--text-primary);
+    font-family:var(--font-kh);
+    font-size:14px;
+    cursor:pointer;
+    transition:all 0.3s ease;
+  }
+
+  .filter-select:hover{
+    background:rgba(255,255,255,0.08);
+    border-color:var(--accent-blue);
+  }
+
+  .filter-select:focus{
+    outline:none;
+    border-color:var(--accent-blue);
+    box-shadow:0 0 0 3px rgba(59,130,246,0.2);
+  }
+
+  @media (max-width: 767px){
+    .filter-select{
+      width:100%;
+      min-width:0;
+    }
+  }
+
+  .lesson-badge{
+    display:inline-flex;
+    align-items:center;
+    gap:6px;
+    padding:6px 12px;
+    background:rgba(59,130,246,0.2);
+    border:1px solid var(--accent-blue);
+    border-radius:20px;
+    font-family:var(--font-kh);
+    font-size:12px;
+    font-weight:600;
+    color:var(--accent-blue);
+  }
+
+  /* Grid Layout */
+  .formulas-grid{
+    display:grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap:20px;
+    margin-bottom:30px;
+  }
+
+  @media (max-width: 767px){
+    .formulas-grid{
+      grid-template-columns: 1fr;
+      gap:16px;
+    }
+  }
+
+  /* Formula Card */
+  .formula-card{
+    background:var(--card-bg);
+    border:1px solid var(--card-border);
+    border-radius:12px;
+    padding:20px;
+    transition:all 0.3s ease;
+    position:relative;
+    overflow:hidden;
+  }
+
+  .formula-card[data-lesson]{
+    display:block;
+  }
+
+  .formula-card.hidden{
+    display:none;
+  }
+
+  .formula-card::before{
+    content:"";
+    position:absolute;
+    top:0;
+    left:0;
+    right:0;
+    height:4px;
+    background:linear-gradient(90deg, var(--accent-blue), var(--accent-purple));
+    opacity:0;
+    transition:opacity 0.3s ease;
+  }
+
+  .formula-card:hover{
+    transform:translateY(-4px);
+    box-shadow:0 8px 24px rgba(0,0,0,0.3);
+    border-color:rgba(255,255,255,0.15);
+  }
+
+  .formula-card:hover::before{
+    opacity:1;
+  }
+
+  @media (max-width: 767px){
+    .formula-card{
+      padding:16px;
+    }
+    .formula-card:hover{
+      transform:none;
+    }
+  }
+
+  .card-header{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    margin-bottom:16px;
+    padding-bottom:12px;
+    border-bottom:1px solid rgba(255,255,255,0.1);
+  }
+
+  .card-icon{
+    font-size:24px;
+    width:40px;
+    height:40px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:rgba(59,130,246,0.2);
+    border-radius:8px;
+  }
+
+  .card-title{
+    font-family:var(--font-kh);
+    font-size:clamp(16px, 4vw, 20px);
+    font-weight:700;
+    color:#fff;
+    margin:0;
+    flex:1;
+  }
+
+  /* Formula Content */
+  .formula-content{
+    font-family:var(--font-kh);
+  }
+
+  .formula-section{
+    margin-bottom:16px;
+  }
+
+  .formula-section:last-child{
+    margin-bottom:0;
+  }
+
+  .section-title{
+    font-family:var(--font-kh);
+    font-size:14px;
+    font-weight:600;
+    color:var(--accent-blue);
+    margin:0 0 10px 0;
+    display:flex;
+    align-items:center;
+    gap:6px;
+  }
+
+  .section-title::before{
+    content:"▸";
+    color:var(--accent-purple);
+  }
+
+  /* Formula Display */
+  .formula{
+    background:rgba(0,0,0,0.2);
+    padding:12px;
+    border-radius:8px;
+    margin:8px 0;
+    border-left:3px solid var(--accent-green);
+    font-family:'Courier New', monospace;
+    font-size:14px;
+    overflow-x:auto;
+    direction:ltr;
+    text-align:left;
+  }
+
+  @media (max-width: 767px){
+    .formula{
+      font-size:12px;
+      padding:10px;
+    }
+  }
+
+  .formula-group{
+    margin:12px 0;
+  }
+
+  .formula-item{
+    margin:6px 0;
+    padding:8px 0;
+    border-bottom:1px dotted rgba(255,255,255,0.1);
+  }
+
+  .formula-item:last-child{
+    border-bottom:none;
+  }
+
+  .formula-label{
+    font-family:var(--font-kh);
+    font-size:12px;
+    color:var(--text-secondary);
+    margin-bottom:4px;
+  }
+
+  .formula-equation{
+    font-family:'Courier New', monospace;
+    font-size:15px;
+    color:#fff;
+    font-weight:600;
+    margin:4px 0;
+  }
+
+  @media (max-width: 767px){
+    .formula-equation{
+      font-size:13px;
+    }
+  }
+
+  /* Description */
+  .description{
+    font-family:var(--font-kh);
+    font-size:13px;
+    color:var(--text-secondary);
+    margin-top:8px;
+    line-height:1.6;
+  }
+
+  @media (max-width: 767px){
+    .description{
+      font-size:12px;
+    }
+  }
+
+  /* Variables List */
+  .variables{
+    margin-top:10px;
+    padding:10px;
+    background:rgba(255,255,255,0.05);
+    border-radius:6px;
+    font-family:var(--font-kh);
+    font-size:12px;
+  }
+
+  .variable-item{
+    margin:4px 0;
+    display:flex;
+    gap:8px;
+  }
+
+  .variable-symbol{
+    font-family:'Courier New', monospace;
+    color:var(--accent-orange);
+    font-weight:600;
+    min-width:30px;
+  }
+
+  /* Footer */
+  footer{
+    text-align:center;
+    padding:20px;
+    margin-top:40px;
+    background:var(--card-bg);
+    border-radius:12px;
+    border:1px solid var(--card-border);
+    font-family:var(--font-kh);
+  }
+
+  @media (max-width: 767px){
+    footer{
+      padding:16px;
+      font-size:12px;
+    }
+  }
+
+  .footer-text{
+    color:var(--text-secondary);
+    margin:8px 0;
+  }
+
+  .footer-credit{
+    color:var(--accent-blue);
+    font-weight:600;
+    margin-top:12px;
+  }
+
+  /* Special styling for important formulas */
+  .formula-important{
+    border-left-color:var(--accent-orange);
+    background:rgba(245,158,11,0.1);
+  }
+
+  /* Scrollbar styling */
+  ::-webkit-scrollbar{
+    width:8px;
+    height:8px;
+  }
+
+  ::-webkit-scrollbar-track{
+    background:rgba(255,255,255,0.05);
+  }
+
+  ::-webkit-scrollbar-thumb{
+    background:rgba(255,255,255,0.2);
+    border-radius:4px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover{
+    background:rgba(255,255,255,0.3);
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+  <header>
+    <h1>សង្ខេបរូបមន្តរូបវិទ្យា ថ្នាក់ទី១២</h1>
+    <p class="subtitle">Summary of Physics Formulas Grade 12</p>
+  </header>
+
+  <div class="filter-section">
+    <label class="filter-label" for="lessonFilter">ជ្រើសរើសមេរៀន:</label>
+    <select id="lessonFilter" class="filter-select">
+      <option value="all">ទាំងអស់ (All Lessons)</option>
+      <option value="1">រមេរៀនទី ១: ទ្រឹស្ដីគីនេទិចនៃឧស្ម័ន</option>
+      <option value="2">រមេរៀនទី ២: ច្បាប់ទី១នៃទែម៉ូឌីណាមិច</option>
+      <option value="3">រមេរៀនទី ៣: ម៉ាស៊ីនកំដៅ</option>
+      <option value="4">រមេរៀនទី ៤: គោលការណ៍នៃការបន្ថែមរលក</option>
+      <option value="5">រមេរៀនទី ៥: ការជ្រៀតជ្រែក និងឌីប្រាក់ស្យុង</option>
+      <option value="6">រមេរៀនទី ៦: ដែន និងកម្លាំងម៉ាញេទិច</option>
+      <option value="7">រមេរៀនទី ៧: អាំងឌុចស្យុងអេឡិចត្រូម៉ាញេទិច</option>
+      <option value="8">រមេរៀនទី ៨: អូតូអាំងឌុចស្យុង</option>
+    </select>
+    <span class="lesson-badge" id="lessonCount">១៣ មេរៀន</span>
+  </div>
+
+  <div class="formulas-grid" id="formulasGrid">
+    
+    <!-- Lesson 1: Kinetic Theory of Gases -->
+    <div class="formula-card" data-lesson="1">
+      <div class="card-header">
+        <div class="card-icon">🌡️</div>
+        <h2 class="card-title">រមេរៀនទី ១: ទ្រឹស្ដីគីនេទិចនៃឧស្ម័ន</h2>
+      </div>
+      <div class="formula-content">
+        <div class="formula-section">
+          <div class="section-title">សមីការឧស្ម័នឥតប្រែប្រួល</div>
+          <div class="formula-important">
+            <div class="formula-equation">PV = nRT</div>
+          </div>
+          <div class="variables">
+            <div class="variable-item"><span class="variable-symbol">P</span> = សម្ពាធ</div>
+            <div class="variable-item"><span class="variable-symbol">V</span> = ទំហំ</div>
+            <div class="variable-item"><span class="variable-symbol">n</span> = ចំនួនម៉ូល</div>
+            <div class="variable-item"><span class="variable-symbol">R</span> = ថេរឧស្ម័ន</div>
+            <div class="variable-item"><span class="variable-symbol">T</span> = សីតុណ្ហភាព</div>
+          </div>
+        </div>
+        <div class="formula-section">
+          <div class="section-title">ចំនួនម៉ូលេគុលសរុប</div>
+          <div class="formula">N = nN_A</div>
+          <div class="description">ដែល N_A = 6.022 × 10²³ mol⁻¹ (លេខអាវ៉ូហ្គាដ្រូ)</div>
+        </div>
+        <div class="formula-section">
+          <div class="section-title">ម៉ាស់ម៉ូល</div>
+          <div class="formula">M = m/n</div>
+        </div>
+        <div class="formula-section">
+          <div class="section-title">ចំនួនម៉ូល</div>
+          <div class="formula">n = N/N_A = m/M</div>
+        </div>
+        <div class="formula-section">
+          <div class="section-title">ថាមពលគីនេទិច</div>
+          <div class="formula-item">
+            <div class="formula-equation">E_k = (3/2)kT</div>
+            <div class="description">(មធ្យមសម្រាប់ម៉ូលេគុលមួយ)</div>
+          </div>
+          <div class="formula-item">
+            <div class="formula-equation">E_total = (3/2)NkT = (3/2)nRT</div>
+            <div class="description">(សរុប)</div>
+          </div>
+        </div>
+        <div class="formula-section">
+          <div class="section-title">ល្បឿន RMS</div>
+          <div class="formula">v_rms = √(3kT/m) = √(3RT/M)</div>
+        </div>
+        <div class="formula-section">
+          <div class="section-title">សម្ពាធដោយឧស្ម័ន</div>
+          <div class="formula-item">
+            <div class="formula-equation">P = (1/3)ρv_rms²</div>
+            <div class="description">(ការប៉ះទង្គិចអេឡាស្ទិក)</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Lesson 2: First Law of Thermodynamics -->
+    <div class="formula-card" data-lesson="2">
+      <div class="card-header">
+        <div class="card-icon">🔥</div>
+        <h2 class="card-title">រមេរៀនទី ២: ច្បាប់ទី១នៃទែម៉ូឌីណាមិច</h2>
+      </div>
+      <div class="formula-content">
+        <div class="formula-section">
+          <div class="section-title">សមីការឧស្ម័នឥតប្រែប្រួល (រវាងពីរដំណាក់កាល)</div>
+          <div class="formula">P₁V₁/T₁ = P₂V₂/T₂</div>
+        </div>
+        <div class="formula-section">
+          <div class="section-title">ការងារ</div>
+          <div class="formula-item">
+            <div class="formula-equation">W = 0</div>
+            <div class="description">(អ៊ីសូកូរី - V ថេរ)</div>
+          </div>
+          <div class="formula-item">
+            <div class="formula-equation">W = PΔV</div>
+            <div class="description">(អ៊ីសូបារី - P ថេរ)</div>
+          </div>
+          <div class="formula-item">
+            <div class="formula-equation">W = nRT ln(V₂/V₁)</div>
+            <div class="description">(អ៊ីសូទែម៉ល - T ថេរ)</div>
+          </div>
+          <div class="formula-item">
+            <div class="formula-equation">W = ∫PdV</div>
+            <div class="description">(សម្ពាធផ្លាស់ប្តូរ)</div>
+          </div>
+        </div>
+        <div class="formula-section">
+          <div class="section-title">ថាមពលខាងក្នុង</div>
+          <div class="formula-item">
+            <div class="formula-equation">U = (3/2)nRT</div>
+            <div class="description">(សម្រាប់ឧស្ម័នម៉ូណូអាតូមិច)</div>
+          </div>
+          <div class="formula-item">
+            <div class="formula-equation">ΔU = (3/2)nRΔT</div>
+          </div>
+        </div>
+        <div class="formula-section">
+          <div class="section-title">ច្បាប់ទី១នៃទែម៉ូឌីណាមិច</div>
+          <div class="formula-important">
+            <div class="formula-equation">Q = W + ΔU</div>
+          </div>
+          <div class="description">
+            <strong>សញ្ញា:</strong><br>
+            • Q > 0: ទទួលកំដៅ<br>
+            • Q < 0: ផ្តល់កំដៅ<br>
+            • W > 0: ឧស្ម័នធ្វើការងារ<br>
+            • W < 0: ការងារធ្វើលើឧស្ម័ន<br>
+            • ΔU > 0: ថាមពលកើន<br>
+            • ΔU < 0: ថាមពលថយ
+          </div>
+        </div>
+        <div class="formula-section">
+          <div class="section-title">ដំណើរការពិសេស</div>
+          <div class="formula-item">
+            <div class="formula-equation">Q = 0</div>
+            <div class="description">(អាដ្យាបាទិច)</div>
+          </div>
+          <div class="formula-item">
+            <div class="formula-equation">ΔU = 0</div>
+            <div class="description">(ស៊ីក្លិក - ត្រលប់ទៅដំណាក់កាលដើម)</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Lesson 3: Heat Engines -->
+    <div class="formula-card" data-lesson="3">
+      <div class="card-header">
+        <div class="card-icon">🚗</div>
+        <h2 class="card-title">រមេរៀនទី ៣: ម៉ាស៊ីនកំដៅ</h2>
+      </div>
+      <div class="formula-content">
+        <div class="formula-section">
+          <div class="section-title">ម៉ាស៊ីនកាណូត (ឥតប្រែប្រួល)</div>
+          <div class="formula-item">
+            <div class="formula-equation">W = Q_H - Q_C = Pt</div>
+            <div class="description">(ការងារដែលធ្វើ)</div>
+          </div>
+          <div class="formula-item">
+            <div class="formula-equation">e = 1 - T_C/T_H</div>
+            <div class="description">(ប្រសិទ្ធភាពទ្រឹស្ដី)</div>
+          </div>
+          <div class="formula-item">
+            <div class="formula-equation">e = W/Q_H</div>
+            <div class="description">(ប្រសិទ្ធភាពពិត)</div>
+          </div>
+        </div>
+        <div class="formula-section">
+          <div class="section-title">ម៉ាស៊ីន ៤-ដំណាក់កាល (អូតូ/ឌីសែល)</div>
+          <div class="description">
+            <strong>ដំណាក់កាលទី១:</strong> ចូល (Intake)<br>
+            <strong>ដំណាក់កាលទី២:</strong> សង្កត់ (Compression)<br>
+            <strong>ដំណាក់កាលទី៣:</strong> ថាមពល (Power) - ផលិតការងារ<br>
+            <strong>ដំណាក់កាលទី៤:</strong> ចេញ (Exhaust)
+          </div>
+        </div>
+        <div class="formula-section">
+          <div class="section-title">ប្រសិទ្ធភាព</div>
+          <div class="formula-item">
+            <div class="formula-equation">e_th = W/Q_H</div>
+            <div class="description">(កំដៅ)</div>
+          </div>
+          <div class="formula-item">
+            <div class="formula-equation">e_m = W_out/W_in</div>
+            <div class="description">(មេកានិច)</div>
+          </div>
+          <div class="formula-item">
+            <div class="formula-equation">e_total = e_th × e_m</div>
+            <div class="description">(សរុប)</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Lesson 4: Wave Superposition -->
+    <div class="formula-card" data-lesson="4">
+      <div class="card-header">
+        <div class="card-icon">🌊</div>
+        <h2 class="card-title">រមេរៀនទី ៤: គោលការណ៍នៃការបន្ថែមរលក</h2>
+      </div>
+      <div class="formula-content">
+        <div class="formula-section">
+          <div class="section-title">រំញ័រ</div>
+          <div class="formula">y = a sin(ωt + φ)</div>
+        </div>
+        <div class="formula-section">
+          <div class="section-title">ការបន្ថែមរលក</div>
+          <div class="formula-item">
+            <div class="formula-equation">y = y₁ + y₂ = A sin(ωt + Φ)</div>
+          </div>
+          <div class="formula-item">
+            <div class="formula-equation">A² = a₁² + a₂² + 2a₁a₂cos(φ₂ - φ₁)</div>
+            <div class="description">(អំព្លីទុតផល)</div>
+          </div>
+          <div class="formula-item">
+            <div class="formula-equation">tanΦ = (a₁sinφ₁ + a₂sinφ₂)/(a₁cosφ₁ + a₂cosφ₂)</div>
+            <div class="description">(ផាសដំបូង)</div>
+          </div>
+        </div>
+        <div class="formula-section">
+          <div class="section-title">រលកនៅចម្ងាយ d</div>
+          <div class="formula">y = a sin(ωt - kd)</div>
+        </div>
+        <div class="formula-section">
+          <div class="section-title">ការជ្រៀតជ្រែក</div>
+          <div class="formula-item">
+            <div class="formula-equation">x = nλ</div>
+            <div class="description">(សំណង់ - constructive)</div>
+          </div>
+          <div class="formula-item">
+            <div class="formula-equation">x = (n - 1/2)λ</div>
+            <div class="description">(បំផ្លាញ - destructive)</div>
+          </div>
+        </div>
+        <div class="formula-section">
+          <div class="section-title">សមីការរលកទូទៅ</div>
+          <div class="formula">y = a sin(kx - ωt)</div>
+          <div class="variables">
+            <div class="variable-item"><span class="variable-symbol">λ</span> = ប្រវែងរលក</div>
+            <div class="variable-item"><span class="variable-symbol">k</span> = 2π/λ (លេខរលក)</div>
+            <div class="variable-item"><span class="variable-symbol">v</span> = λf = ω/k (ល្បឿនរលក)</div>
+            <div class="variable-item"><span class="variable-symbol">ω</span> = 2πf (ភាពញឹកញាប់មុំ)</div>
+          </div>
+        </div>
+        <div class="formula-section">
+          <div class="section-title">រលកឈរ</div>
+          <div class="formula-item">
+            <div class="formula-equation">y = 2a sin(kx) cos(ωt)</div>
+          </div>
+          <div class="formula-item">
+            <div class="formula-equation">x = nλ/2</div>
+            <div class="description">(ចំណុចណូត - nodes)</div>
+          </div>
+          <div class="formula-item">
+            <div class="formula-equation">x = (n - 1/2)λ/2</div>
+            <div class="description">(ចំណុចអង់ទីណូត - antinodes)</div>
+          </div>
+          <div class="description">
+            • ចំនួនពាក់កណ្តាលប្រវែងរលក = n<br>
+            • ចំនួនអង់ទីណូត = n<br>
+            • ចំនួនណូត = n + 1<br>
+            • ចំនួនរង្វង់ = n
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Lesson 5: Interference and Diffraction -->
+    <div class="formula-card" data-lesson="5">
+      <div class="card-header">
+        <div class="card-icon">💫</div>
+        <h2 class="card-title">រមេរៀនទី ៥: ការជ្រៀតជ្រែក និងឌីប្រាក់ស្យុង</h2>
+      </div>
+      <div class="formula-content">
+        <div class="formula-section">
+          <div class="section-title">រលកមេកានិច</div>
+          <div class="formula-item">
+            <div class="formula-equation">Δd = d₂ - d₁</div>
+            <div class="description">(ភាពខុសគ្នាផ្លូវ)</div>
+          </div>
+          <div class="formula-item">
+            <div class="formula-equation">Δd = nλ</div>
+            <div class="description">(សំណង់ - constructive)</div>
+          </div>
+          <div class="formula-item">
+            <div class="formula-equation">Δd = (n - 1/2)λ</div>
+            <div class="description">(បំផ្លាញ - destructive)</div>
+          </div>
+          <div class="formula-item">
+            <div class="formula-equation">d₁ + d₂ = S₁S₂</div>
+            <div class="description">(ផលបូកចម្ងាយ)</div>
+          </div>
+        </div>
+        <div class="formula-section">
+          <div class="section-title">រលកសំឡេង</div>
+          <div class="formula-item">
+            <div class="formula-equation">Δd = a sinθ</div>
+            <div class="description">(ភាពខុសគ្នាផ្លូវ)</div>
+          </div>
+          <div class="formula-item">
+            <div class="formula-equation">f_beat = |f₁ - f₂|</div>
+            <div class="description">(ភាពញឹកញាប់ប៉ះ)</div>
+          </div>
+        </div>
+        <div class="formula-section">
+          <div class="section-title">រលកពន្លឺ</div>
+          <div class="formula-item">
+            <div class="formula-equation">sinθ = nλ/a</div>
+            <div class="description">(ចន្លោះភ្លឺ - bright fringe)</div>
+          </div>
+          <div class="formula-item">
+            <div class="formula-equation">sinθ = (n - 1/2)λ/a</div>
+            <div class="description">(ចន្លោះងងឹត - dark fringe)</div>
+          </div>
+          <div class="formula-item">
+            <div class="formula-equation">i = λD/a</div>
+            <div class="description">(ចម្ងាយចន្លោះ)</div>
+          </div>
+          <div class="formula-item">
+            <div class="formula-equation">x_n = nλD/a</div>
+            <div class="description">(ទីតាំងចន្លោះភ្លឺ)</div>
+          </div>
+          <div class="formula-item">
+            <div class="formula-equation">x_n = (n - 1/2)λD/a</div>
+            <div class="description">(ទីតាំងចន្លោះងងឹត)</div>
+          </div>
+        </div>
+        <div class="formula-section">
+          <div class="section-title">ឌីប្រាក់ស្យុង (បន្ទះរន្ទះមួយ)</div>
+          <div class="formula-item">
+            <div class="formula-equation">a sinθ = nλ</div>
+            <div class="description">(ទីតាំងមុំ)</div>
+          </div>
+          <div class="formula-item">
+            <div class="formula-equation">x = nλD/a</div>
+            <div class="description">(ទីតាំងចន្លោះងងឹត)</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Lesson 6: Magnetic Fields -->
+    <div class="formula-card" data-lesson="6">
+      <div class="card-header">
+        <div class="card-icon">🧲</div>
+        <h2 class="card-title">រមេរៀនទី ៦: ដែន និងកម្លាំងម៉ាញេទិច</h2>
+      </div>
+      <div class="formula-content">
+        <div class="formula-section">
+          <div class="section-title">ដែនម៉ាញេទិច</div>
+          <div class="formula-item">
+            <div class="formula-label">ខ្សែត្រង់:</div>
+            <div class="formula-equation">B = μ₀I / (2πr)</div>
+          </div>
+          <div class="formula-item">
+            <div class="formula-label">រង្វង់:</div>
+            <div class="formula-equation">B = μ₀I / (2R)</div>
+          </div>
+          <div class="formula-item">
+            <div class="formula-label">សូលេណូអ៊ីត:</div>
+            <div class="formula-equation">B = μ₀nI</div>
+            <div class="description">ដែល n = N/L (ចំនួនវេនក្នុងមួយឯកតាប្រវែង)</div>
+          </div>
+        </div>
+        <div class="formula-section">
+          <div class="section-title">កម្លាំងអេឡិចត្រូម៉ាញេទិច</div>
+          <div class="formula-item">
+            <div class="formula-label">កម្លាំងលើខ្សែ:</div>
+            <div class="formula-equation">F = BIL sinα</div>
+            <div class="description">ដែល α = មុំរវាង B និង I</div>
+          </div>
+          <div class="formula-item">
+            <div class="formula-label">កម្លាំងរវាងខ្សែប៉ារ៉ាឡែល:</div>
+            <div class="formula-equation">F = μ₀I₁I₂L / (2πd)</div>
+          </div>
+        </div>
+        <div class="formula-section">
+          <div class="section-title">ចលនាផង់ក្នុងដែនឯកសណ្ឋាន</div>
+          <div class="formula-item">
+            <div class="formula-equation">Fₘ = qvB</div>
+            <div class="description">(កម្លាំងម៉ាញេទិច)</div>
+          </div>
+          <div class="formula-item">
+            <div class="formula-equation">R = mv/(qB)</div>
+            <div class="description">(កាំនៃគន្លង)</div>
+          </div>
+          <div class="formula-item">
+            <div class="formula-equation">T = 2πm/(qB)</div>
+            <div class="description">(រយៈពេល)</div>
+          </div>
+          <div class="formula-item">
+            <div class="formula-equation">ω = qB/m</div>
+            <div class="description">(ភាពញឹកញាប់មុំ)</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Lesson 7: Electromagnetic Induction -->
+    <div class="formula-card" data-lesson="7">
+      <div class="card-header">
+        <div class="card-icon">⚡</div>
+        <h2 class="card-title">រមេរៀនទី ៧: អាំងឌុចស្យុងអេឡិចត្រូម៉ាញេទិច</h2>
+      </div>
+      <div class="formula-content">
+        <div class="formula-section">
+          <div class="section-title">ភ្លុចម៉ាញេទិច</div>
+          <div class="formula">Φ = BA cosθ</div>
+          <div class="description">ដែល θ = មុំរវាង B និង A</div>
+        </div>
+        <div class="formula-section">
+          <div class="section-title">បម្រែបម្រួលភ្លុច</div>
+          <div class="formula-item">
+            <div class="formula-equation">ΔΦ = BΔA</div>
+            <div class="description">(នៅពេល B ថេរ)</div>
+          </div>
+          <div class="formula-item">
+            <div class="formula-equation">ΔΦ = AΔB</div>
+            <div class="description">(នៅពេល A ថេរ)</div>
+          </div>
+          <div class="formula-item">
+            <div class="formula-equation">ΔΦ = Δ(BA cosθ)</div>
+            <div class="description">(ករណីទូទៅ)</div>
+          </div>
+        </div>
+        <div class="formula-section">
+          <div class="section-title">កម្លាំងអគ្គិសនីចលករអាំងថ្មី</div>
+          <div class="formula-item">
+            <div class="formula-equation">E = -N ΔΦ/Δt</div>
+            <div class="description">(ច្បាប់ផារ៉ាដេ)</div>
+          </div>
+          <div class="formula-item">
+            <div class="formula-equation">E = BvL</div>
+            <div class="description">(ម៉ូស្យុង - motional EMF)</div>
+          </div>
+          <div class="formula-item">
+            <div class="formula-equation">e = NBAω sin(ωt)</div>
+            <div class="description">(ហ្សេនេរ៉ាទ័រ - generator)</div>
+          </div>
+          <div class="formula-item">
+            <div class="formula-equation">e_max = NBAω</div>
+            <div class="description">(កម្លាំងអគ្គិសនីចលករអតិបរមា)</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Lesson 8: Self-Inductance -->
+    <div class="formula-card" data-lesson="8">
+      <div class="card-header">
+        <div class="card-icon">🔌</div>
+        <h2 class="card-title">រមេរៀនទី ៨: អូតូអាំងឌុចស្យុង</h2>
+      </div>
+      <div class="formula-content">
+        <div class="formula-section">
+          <div class="section-title">អាំងឌុចតង់</div>
+          <div class="formula">L = NΦ/I</div>
+        </div>
+        <div class="formula-section">
+          <div class="section-title">កម្លាំងអគ្គិសនីចលករអូតូអាំងខ្ចី</div>
+          <div class="formula">e = -L di/dt</div>
+        </div>
+        <div class="formula-section">
+          <div class="section-title">តង់ស្យុងសងខាងបូប៊ីន</div>
+          <div class="formula">V = Ri + L di/dt</div>
+        </div>
+        <div class="formula-section">
+          <div class="section-title">សៀគ្វី RL</div>
+          <div class="formula-item">
+            <div class="formula-equation">τ = L/R</div>
+            <div class="description">(ថេរ័ណ្ដពេលវេលា)</div>
+          </div>
+          <div class="formula-item">
+            <div class="formula-equation">i = (E/R)(1 - e^(-t/τ))</div>
+            <div class="description">(កំពុងផ្ទុក)</div>
+          </div>
+          <div class="formula-item">
+            <div class="formula-equation">i = (E/R)e^(-t/τ)</div>
+            <div class="description">(កំពុងរំសាយ)</div>
+          </div>
+        </div>
+        <div class="formula-section">
+          <div class="section-title">សៀគ្វីលំរយោល LC</div>
+          <div class="formula-item">
+            <div class="formula-equation">T = 2π√LC</div>
+            <div class="description">(រយៈពេល)</div>
+          </div>
+          <div class="formula-item">
+            <div class="formula-equation">f = 1/(2π√LC)</div>
+            <div class="description">(ភាពញឹកញាប់)</div>
+          </div>
+          <div class="formula-item">
+            <div class="formula-equation">Q_max = CV_max</div>
+            <div class="description">(បន្ទុកអតិបរមា)</div>
+          </div>
+        </div>
+        <div class="formula-section">
+          <div class="section-title">សៀគ្វីចរន្តឆ្លាស់ (AC)</div>
+          <div class="formula-item">
+            <div class="formula-equation">i = Iₘ sin(ωt + φ)</div>
+            <div class="description">(ចរន្តភ្លាម)</div>
+          </div>
+          <div class="formula-item">
+            <div class="formula-equation">Iᵣₘₛ = Iₘ/√2</div>
+            <div class="description">(RMS current)</div>
+          </div>
+          <div class="formula-item">
+            <div class="formula-equation">Vᵣₘₛ = Vₘ/√2</div>
+            <div class="description">(RMS voltage)</div>
+          </div>
+          <div class="formula-item">
+            <div class="formula-equation">I_c = CωV</div>
+            <div class="description">(ចរន្តកុងដង់)</div>
+          </div>
+          <div class="formula-item">
+            <div class="formula-equation">I_L = V_L/(Lω)</div>
+            <div class="description">(ចរន្តអាំងឌុច)</div>
+          </div>
+          <div class="formula-item">
+            <div class="formula-equation">tanφ = (I_L - I_C)/I_R</div>
+            <div class="description">(មុំផាស)</div>
+          </div>
+        </div>
+        <div class="formula-section">
+          <div class="section-title">សៀគ្វី RLC ស៊េរី</div>
+          <div class="formula-item">
+            <div class="formula-equation">Z = √(R² + (Lω - 1/(Cω))²)</div>
+            <div class="description">(អាំបេដង់)</div>
+          </div>
+          <div class="formula-item">
+            <div class="formula-equation">Iᵣₘₛ = Vᵣₘₛ/Z</div>
+          </div>
+          <div class="formula-item">
+            <div class="formula-equation">V_R = IᵣₘₛR</div>
+          </div>
+          <div class="formula-item">
+            <div class="formula-equation">V_C = Iᵣₘₛ/(Cω)</div>
+          </div>
+          <div class="formula-item">
+            <div class="formula-equation">V_L = IᵣₘₛLω</div>
+          </div>
+          <div class="formula-item">
+            <div class="formula-equation">tanφ = (V_L - V_C)/V_R</div>
+          </div>
+        </div>
+        <div class="formula-section">
+          <div class="section-title">សៀគ្វីរវរសូណង់</div>
+          <div class="formula-item">
+            <div class="formula-equation">Lω = 1/(Cω)</div>
+            <div class="description">(លក្ខខណ្ឌរវរសូណង់)</div>
+          </div>
+          <div class="formula-item">
+            <div class="formula-equation">f = 1/(2π√LC)</div>
+            <div class="description">(ភាពញឹកញាប់រវរសូណង់)</div>
+          </div>
+          <div class="formula-item">
+            <div class="formula-equation">Z = R</div>
+            <div class="description">(នៅរវរសូណង់)</div>
+          </div>
+        </div>
+        <div class="formula-section">
+          <div class="section-title">ត្រង់ស្ទទាំងរ (Transformer)</div>
+          <div class="formula-item">
+            <div class="formula-equation">V₂/V₁ = N₂/N₁</div>
+            <div class="description">(តង់ស្យុង)</div>
+          </div>
+          <div class="formula-item">
+            <div class="formula-equation">I₁/I₂ = N₂/N₁</div>
+            <div class="description">(ចរន្ត)</div>
+          </div>
+          <div class="formula-item">
+            <div class="formula-equation">P₁ = P₂</div>
+            <div class="description">(ឥតបាត់បង់)</div>
+          </div>
+          <div class="formula-item">
+            <div class="formula-equation">η = P₂/P₁ × 100%</div>
+            <div class="description">(ប្រសិទ្ធភាព)</div>
+          </div>
+          <div class="description">
+            <strong>ប្រភេទ:</strong><br>
+            • <strong>Step-down:</strong> V₂ < V₁, N₂ < N₁<br>
+            • <strong>Step-up:</strong> V₂ > V₁, N₂ > N₁
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <footer>
+    <p class="footer-text">សម្រាប់ការសិក្សា និងការប្រឡង</p>
+    <p class="footer-text">For Study and Examination</p>
+    <p class="footer-credit">រចនាដោយ Hak Yany+AI</p>
+  </footer>
+</div>
+
+<script>
+const lessonFilter = document.getElementById('lessonFilter');
+const formulasGrid = document.getElementById('formulasGrid');
+const lessonCount = document.getElementById('lessonCount');
+const cards = document.querySelectorAll('.formula-card');
+
+function updateFilter() {
+  const selectedLesson = lessonFilter.value;
+  let visibleCount = 0;
+
+  cards.forEach(card => {
+    if (selectedLesson === 'all' || card.dataset.lesson === selectedLesson) {
+      card.classList.remove('hidden');
+      visibleCount++;
+    } else {
+      card.classList.add('hidden');
+    }
+  });
+
+  // Update count badge
+  if (selectedLesson === 'all') {
+    lessonCount.textContent = `${cards.length} មេរៀន`;
+  } else {
+    lessonCount.textContent = `${visibleCount} មេរៀន`;
+  }
+
+  // Smooth scroll to top
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+lessonFilter.addEventListener('change', updateFilter);
+
+// Initialize count
+updateFilter();
+</script>
+
+</body>
+</html>
